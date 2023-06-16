@@ -182,27 +182,38 @@ export default function App() {
             maxLength="6"
           ></input>
           <br />
-          <button onClick={set}>set</button>
+          <button id="set" onClick={set}>
+            set
+          </button>
         </div>
         <div className="Draw">
           <canvas className="Canvas" width="300" height="200"></canvas>
         </div>
         <div className="Control">
-          <button onClick={fAnotB}>A not B</button>
-          <button onClick={fBnotA}>B not A</button>
+          <button className="control1" onClick={fAnotB}>
+            A not B
+          </button>
+          <button className="control1" onClick={fBnotA}>
+            B not A
+          </button>
           <br />
-          <button onClick={fAorB}>A or B</button>
-          <button onClick={fAandB}>A and B</button>
-          <button onClick={fAxorB}>B xor A</button>
+          <button className="control2" onClick={fAorB}>
+            A or B
+          </button>
+          <button className="control2" onClick={fAandB}>
+            A and B
+          </button>
+          <button className="control2" onClick={fAxorB}>
+            B xor A
+          </button>
           <br />
         </div>
-        <p>
-          *inputs A and B colors in hex(16) - rrggbb
-          <br />
-          "set" button for load to canvas, buttons below for changing logic
-          after
-        </p>
       </div>
+      <p>
+        *inputs A and B colors in hex(16) - rrggbb(16)
+        <br />
+        "set" button for load to canvas, buttons below for changing logic after
+      </p>
     </div>
   );
 }

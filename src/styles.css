@@ -3,11 +3,34 @@
   text-align: center;
 }
 .Canvas {
-  border: 1px solid black;
+  background-color: black;
 }
 .InputValue {
   width: 10px;
 }
 .InputColor {
   width: 60px;
+}
+.Box {
+  width: 300px;
+  text-align: center;
+  display: inline-block;
+}
+.Input {
+  padding: 5px;
+  background-color: black;
+  color: white;
+}
+input {
+  margin-right: 15px;
+}
+#set {
+  width: 100%;
+  margin-top: 5px;
+}
+.control1 {
+  width: 150px;
+}
+.control2 {
+  width: 100px;
 }
