@@ -2,3 +2,12 @@
   font-family: sans-serif;
   text-align: center;
 }
+.Canvas {
+  border: 1px solid black;
+}
+.InputValue {
+  width: 10px;
+}
+.InputColor {
+  width: 60px;
+}
