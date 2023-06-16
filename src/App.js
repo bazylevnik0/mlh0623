@@ -15,18 +15,10 @@ export default function App() {
     }
   }
   init();
-  const [Avalue, setAvalue] = useState();
-  const [Bvalue, setBvalue] = useState();
   const [Acolor, setAcolor] = useState();
   const [Bcolor, setBcolor] = useState();
   function changeValue(e) {
     switch (e.target.id) {
-      case "Avalue":
-        setAvalue(e.target.value);
-        break;
-      case "Bvalue":
-        setBvalue(e.target.value);
-        break;
       case "Acolor":
         setAcolor(e.target.value);
         break;
@@ -40,14 +32,14 @@ export default function App() {
     for (let y = 0; y < 20; y++) {
       A[y] = [];
       for (let x = 0; x < 20; x++) {
-        A[y][x] = { v: +Avalue };
+        A[y][x] = { v: 1 };
       }
     }
     //set B
     for (let y = 0; y < 20; y++) {
       B[y] = [];
       for (let x = 0; x < 20; x++) {
-        B[y][x] = { v: +Bvalue };
+        B[y][x] = { v: 1 };
       }
     }
     //set M to start position
@@ -86,6 +78,85 @@ export default function App() {
       }
     }
   }
+  function fAnotB() {
+    for (let y = 0; y < 20; y++) {
+      for (let x = 0; x < 30; x++) {
+        if (M[y][x].a) M[y][x].a.v = 1;
+        if (M[y][x].b) M[y][x].b.v = 0;
+        if (M[y][x].a && M[y][x].b) {
+          M[y][x].a.v = 0;
+          M[y][x].b.v = 0;
+        }
+      }
+    }
+    draw();
+  }
+  function fBnotA() {
+    for (let y = 0; y < 20; y++) {
+      for (let x = 0; x < 30; x++) {
+        if (M[y][x].a) M[y][x].a.v = 0;
+        if (M[y][x].b) M[y][x].b.v = 1;
+        if (M[y][x].a && M[y][x].b) {
+          M[y][x].a.v = 0;
+          M[y][x].b.v = 0;
+        }
+      }
+    }
+    draw();
+  }
+  function fAorB() {
+    let step = 0;
+    for (let y = 0; y < 20; y++) {
+      for (let x = 0; x < 30; x++) {
+        if (M[y][x].a) M[y][x].a.v = 1;
+        if (M[y][x].b) M[y][x].b.v = 1;
+        if (M[y][x].a && M[y][x].b) {
+          if (step % 2) {
+            M[y][x].a.v = 1;
+            M[y][x].b.v = 0;
+          } else {
+            M[y][x].a.v = 0;
+            M[y][x].b.v = 1;
+          }
+          step++;
+        }
+      }
+    }
+    draw();
+  }
+  function fAandB() {
+    let step = 0;
+    for (let y = 0; y < 20; y++) {
+      for (let x = 0; x < 30; x++) {
+        if (M[y][x].a) M[y][x].a.v = 0;
+        if (M[y][x].b) M[y][x].b.v = 0;
+        if (M[y][x].a && M[y][x].b) {
+          if (step % 2) {
+            M[y][x].a.v = 1;
+            M[y][x].b.v = 0;
+          } else {
+            M[y][x].a.v = 0;
+            M[y][x].b.v = 1;
+          }
+          step++;
+        }
+      }
+    }
+    draw();
+  }
+  function fAxorB() {
+    for (let y = 0; y < 20; y++) {
+      for (let x = 0; x < 30; x++) {
+        if (M[y][x].a) M[y][x].a.v = 1;
+        if (M[y][x].b) M[y][x].b.v = 1;
+        if (M[y][x].a && M[y][x].b) {
+          M[y][x].a.v = 0;
+          M[y][x].b.v = 0;
+        }
+      }
+    }
+    draw();
+  }
   return (
     <div className="App">
       <h1>Hello MLH</h1>
@@ -93,14 +164,6 @@ export default function App() {
       <div className="Box">
         <div className="Input">
           <label>A: </label>
-          <input
-            id="Avalue"
-            value={Avalue}
-            onChange={changeValue}
-            className="InputValue"
-            type="text"
-            maxLength="1"
-          ></input>
           <input
             id="Acolor"
             value={Acolor}
@@ -110,14 +173,6 @@ export default function App() {
             maxLength="6"
           ></input>
           <label>B: </label>
-          <input
-            id="Bvalue"
-            value={Bvalue}
-            onChange={changeValue}
-            className="InputValue"
-            type="text"
-            maxLength="1"
-          ></input>
           <input
             id="Bcolor"
             value={Bcolor}
@@ -133,16 +188,16 @@ export default function App() {
           <canvas className="Canvas" width="300" height="200"></canvas>
         </div>
         <div className="Control">
-          <button>A not B</button>
-          <button>B not A</button>
+          <button onClick={fAnotB}>A not B</button>
+          <button onClick={fBnotA}>B not A</button>
           <br />
-          <button>A or B</button>
-          <button>A and B</button>
-          <button>B xor A</button>
+          <button onClick={fAorB}>A or B</button>
+          <button onClick={fAandB}>A and B</button>
+          <button onClick={fAxorB}>B xor A</button>
           <br />
         </div>
         <p>
-          *inputs A and B in form: value - 0,1 and color - rrggbb(16)
+          *inputs A and B colors in hex(16) - rrggbb
           <br />
           "set" button for load to canvas, buttons below for changing logic
           after
