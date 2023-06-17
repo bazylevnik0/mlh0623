@@ -204,7 +204,7 @@ export default function App() {
             A and B
           </button>
           <button className="control2" onClick={fAxorB}>
-            B xor A
+            A xor B
           </button>
           <br />
         </div>
